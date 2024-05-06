@@ -91,7 +91,17 @@ const handleCancel = () => {
 setTitle("")
 setContent("")
 setSelectedNote(null);
-}
+};
+
+
+const deleteNote = (
+  event: React.MouseEvent,
+  noteId: number) => {
+    event.stopPropagation();
+    const updatedNotes = notes.filter((note) => note.id !== noteId
+)
+setNotes(updatedNotes);
+};
 
   return (
 
@@ -117,7 +127,7 @@ setSelectedNote(null);
     {notes.map((note)=>  (
        <div className="note-item" onClick={() =>  handleNoteClick(note)} >
        <div className="notes-header">
-         <button>X</button>
+         <button onClick={(event) => deleteNote(event,note.id) }>X</button>
        </div>
        <h2>{note.title}</h2>
          <p>{note.content}</p>
